@@ -1,16 +1,23 @@
 const express = require('express')
 const logger = require('../logger')
 const { v4: uuid } = require('uuid')
-const { bookmarks } = require('../store')
-
+// const { bookmarks } = require('../store')
+const BookmarksService = require('../bookmarks_service')
 const bookmarksRouter = express.Router()
 const bodyParser = express.json()
 
 
 bookmarksRouter
     .route('/bookmarks')
-    .get((req,res) =>{
-    res.send(bookmarks)
+    .get((req,res, next) =>{
+    // res.send(bookmarks)
+    // res.send('bookmarks request')
+        BookmarksService.getBookmarks(req.app.get('db'))
+            .then(bookmarks => {              
+                res.json(bookmarks)
+            })
+            .catch(next)
+
 })
     .post(bodyParser, (req,res) => {
         const { title, url, description, rating } = req.body;

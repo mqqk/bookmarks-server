@@ -6,7 +6,6 @@ const helmet = require('helmet')
 const logger = require('./logger')
 const { NODE_ENV } = require('./config')
 const app = express()
-const { bookmarks } = require('./store')
 const bookmarksRouter = require('./bookmarks-router/bookmarks-router')
 const bookmarkRouter = require('./bookmark-router/bookmark-router')
 
@@ -19,7 +18,9 @@ app.use(helmet())
 app.use(cors())
 
 
-
+app.get('/', (req,res) =>{
+    res.send('hi')
+})
 
 
 
@@ -39,9 +40,7 @@ app.use(function validateBearerToken(req,res,next) {
 app.use(bookmarksRouter)
 app.use(bookmarkRouter)
 
-// app.get('/', (req,res) =>{
-//     res.send(bookmarks)
-// })
+
 
  app.use(function errorHandler(error, req, res, next) {
        let response

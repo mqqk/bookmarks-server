@@ -1,14 +1,17 @@
 const express = require('express')
 const logger = require('../logger')
-const { bookmarks } = require('../store')
+// const { bookmarks } = require('../store')
 const bookmarkRouter = express.Router()
+const BookmarksService = require('../bookmarks_service')
 
 bookmarkRouter
     .route('/:id')
     .get((req,res) => {
         const { id } = req.params;
         
-        const bookmark = bookmarks.find(bookmark => bookmark.id === id)
+        // const bookmark = bookmarks.find(bookmark => bookmark.id === id)
+        BookmarksService.getBookmark(req.app.get('db'),id)
+            .then(bookmark => {
 
         if(!bookmark) {
             logger.error(`Bookmark with id ${id} not found `);
@@ -18,6 +21,7 @@ bookmarkRouter
         }
         
         res.json(bookmark)
+        })
     })
 
     .delete((req,res) => {
