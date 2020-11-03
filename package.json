@@ -1,37 +1,39 @@
 {
-  "name": "bookmark-server",
-  "version": "1.0.0",
+  "name": "bookmarks-server",
+  "version": "0.0.1",
   "description": "",
-  "main": "index.js",
+  "main": "src/server.js",
   "scripts": {
     "test": "mocha --require test/setup.js",
     "dev": "nodemon src/server.js",
     "migrate": "postgrator --config postgrator-config.js",
-    "migrate:test": "set NODE_ENV=test && npm run migrate",
+    "migrate:test": "env NODE_ENV=test npm run migrate",
     "start": "node src/server.js",
     "predeploy": "npm audit",
     "deploy": "git push heroku master"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "student",
+  "license": "none",
   "dependencies": {
     "cors": "^2.8.5",
-    "dotenv": "^8.2.0",
-    "express": "^4.17.1",
-    "helmet": "^4.1.1",
-    "knex": "^0.21.9",
-    "logger": "0.0.1",
-    "morgan": "^1.10.0",
-    "pg": "^8.4.2",
+    "dotenv": "^6.2.0",
+    "express": "^4.16.4",
+    "helmet": "^3.15.0",
+    "knex": "^0.16.5",
+    "morgan": "^1.9.1",
+    "node-db-migration": "^1.3.3",
+    "pg": "^7.18.2",
     "uuid": "^8.3.1",
-    "winston": "^3.3.3"
+    "valid-url": "^1.0.9",
+    "winston": "^3.2.1",
+    "xss": "^1.0.3"
   },
   "devDependencies": {
     "chai": "^4.2.0",
-    "mocha": "^8.2.0",
-    "nodemon": "^2.0.5",
+    "mocha": "^8.2.1",
+    "nodemon": "^1.18.9",
     "postgrator-cli": "^3.2.0",
-    "supertest": "^5.0.0"
+    "supertest": "^3.3.0"
   }
 }

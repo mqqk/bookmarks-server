@@ -12,6 +12,7 @@ describe('Bookmarks Endpoints', function() {
             client:'pg',
             connection:process.env.TEST_DB_URL,
         })
+        app.set('db', db)
     })
 
     after('disconnect from db', () => db.destroy())
@@ -19,14 +20,14 @@ describe('Bookmarks Endpoints', function() {
 
     context('Given there are bookmarks', () => {
 
-        before('clean the table', () => db('bookmarks').truncation())
+        before('clean the table', () => db('bookmarks').truncate())
         afterEach('clean up',() => db('bookmarks').truncate())
 
-        describe(`Get /bookmarks`, () => {
+        describe(`Get /api/bookmarks`, () => {
             context('Given no bookmarks', () => {
                 it('responds with 200 and an empty list', () => {
                     return supertest(app)
-                        .get('/bookmarks')
+                        .get('/api/bookmarks')
                         .expect(200,[])
                 })
             })

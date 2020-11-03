@@ -71,7 +71,7 @@ bookmarksRouter
         
         res
             .status(201)
-            .location(`http://localhost:8000/${id}`)
+            .location(`http://localhost:8001/${id}`)
             .json({id})
     })
 
